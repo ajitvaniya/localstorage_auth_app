@@ -12,6 +12,7 @@ const Login = () => {
     const [form] = Form.useForm();
 
     const handleSubmit =(data)=>{
+        setLoading(true);
         const userList = JSON.parse(localStorage.getItem('registeredUserList'));
         let checkUser =
         userList?.length > 0 &&
@@ -19,16 +20,19 @@ const Login = () => {
             (item) => item.email === data.email && item.password === data.password
         );
         if (userList?.length > 0 && checkUser) {
+            setLoading(false);
             localStorage.setItem('authUser',JSON.stringify(checkUser));
-            
+
             vsmNotify.success({
                 message: vsmAuth.success,
             });
             history.push("/dashboard");
         } else {
+            setLoading(false);
             vsmNotify.error({
                 message:'User Not Found',
             });
+            setIsError('User Not Found');
         }
     }
 
