@@ -3,11 +3,10 @@ import { Detector } from "react-detect-offline";
 import { BrowserRouter } from "react-router-dom";
 import { Spin } from "antd";
 import "./App.css";
+ 
+import AuthAppRouter from './utils/AppAuthRouter'
+import AppRouter from './utils/AppRouter'
 
-const LazyAppRouterComponent = React.lazy(() => import("./utils/AppRouter"));
-const LazyAppAuthRouterComponent = React.lazy(() =>
-  import("./utils/AuthAppRouter")
-);
 
 function App() {
   const authUser = localStorage.getItem('authUser');
@@ -29,11 +28,14 @@ function App() {
                 </div>
               }
             >
-              {authUser ? (
-                <LazyAppAuthRouterComponent />
+             {authUser ? (
+                <AuthAppRouter 
+                
+                
+                />
               ) : (
-                <LazyAppRouterComponent />
-              )}
+                <AppRouter />
+               )} 
             </Suspense>
           </>
         )}
