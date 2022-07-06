@@ -29,10 +29,7 @@ function App() {
               }
             >
              {authUser ? (
-                <AuthAppRouter 
-                
-                
-                />
+                <AuthAppRouter />
               ) : (
                 <AppRouter />
                )} 
